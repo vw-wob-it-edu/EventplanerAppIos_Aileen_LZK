@@ -19,8 +19,15 @@ struct EventInfoView: View {
             Button(action: {
                 share()
             }) {
-                Text("Share")
+                Image("share").renderingMode(.original)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 150, height: 150)
+                    .scaledToFill()
             }
+            
+            
+
             
             List{
                 Text("Name: \(eventArray [index].name)")
@@ -33,7 +40,6 @@ struct EventInfoView: View {
                 Text("Min Age: \(eventArray [index].minAge)")
                 
             }
-            
         }
         
 }
