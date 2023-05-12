@@ -5,6 +5,7 @@
 //  Created by Kirschenstein, Justus (SE-5/5AFI1A) on 17.04.23.
 //
 import SwiftUI
+import UIKit
 
 struct EventInfoView: View {
     
@@ -13,7 +14,14 @@ struct EventInfoView: View {
     @State var index:Int
     
     var body: some View {
+        
         VStack{
+            Button(action: {
+                share()
+            }) {
+                Text("Share")
+            }
+            
             List{
                 Text("Name: \(eventArray [index].name)")
                 Text("Date: \(eventArray [index].date)")
@@ -25,8 +33,10 @@ struct EventInfoView: View {
                 Text("Min Age: \(eventArray [index].minAge)")
                 
             }
+            
         }
-    }
+        
+}
     
     func displazEventSettings (input1: String, input2: Int, text: String) -> Text{
         if (input1 == "" || input2 == 0){
@@ -36,6 +46,14 @@ struct EventInfoView: View {
             
         }
     }
+    
+    func share() {
+            guard let urlShare = URL(string:  "https://developer.apple.com/xcode/swiftui/") else { return }
+            let activityVC = UIActivityViewController(activityItems: ["Name: \(eventArray [index].name) ", "Date:\(eventArray [index].date)", "Description: \(eventArray [index].description)", "Location: \(eventArray [index].location)", "Contact: \(eventArray [index].contact)", "Costs: \(eventArray [index].costs)$", "Max participant: \(eventArray [index].maxParticipant)", "Min Age: \(eventArray [index].minAge)"], applicationActivities: nil)
+               UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+        }
+
+    
 }
 
 
